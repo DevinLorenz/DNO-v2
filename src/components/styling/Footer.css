@@ -1,0 +1,16 @@
+footer {
+    background-color: #383838;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+    
+    margin: 0 auto;
+    max-width: 2000px;
+}
+
+footer img {
+    width: 110px;
+    height: 110px;
+    
+}

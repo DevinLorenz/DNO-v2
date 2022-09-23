@@ -1,0 +1,75 @@
+
+.header-comp {
+    
+    max-width: 2000px;
+    height: 80px;
+    background-color: #4A4A4A;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: #500015 5px solid;
+    color: white;
+    
+}
+
+#header-btn {
+    background-color: transparent;
+    border: none;
+    color: white;
+    width: 130px;
+    height: 80px;
+    font-size: large;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease-in-out;
+    
+}
+
+#header-btn:hover {
+    background-color: #858585;
+    color: white;
+}
+
+#logoutbtn {
+    background-color: transparent;
+    border: none;
+    color: white;
+    width: 130px;
+    height: 80px;
+    font-size: large;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease-in-out;
+    
+}
+
+#logoutbtn:hover {
+    background-color: #500015;
+    color: white;
+}
+
+#header-btn:active {
+    background-color: #707070;
+    color: white;
+}
+
+.header-logo {
+    width: 110px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 40px;
+    font-size: larger;
+    
+}
+
+img {
+    width: 100px;
+    height: 80px;
+    margin-right: 10px;
+    
+}
