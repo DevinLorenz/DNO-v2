@@ -1,8 +1,22 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import './styling/Header.css'
+import { useContext } from 'react'
+import AuthContext from '../store/authContext'
+
+
 
 const Header = () => {
+  const authCtx = useContext(AuthContext)
+  
+  const logoutHandler = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('exp')
+    localStorage.removeItem('userId')
+    window.location.reload()
+  }
+
+
   return (
     <header className='header-comp'>
       <div className='header-logo'>
@@ -10,11 +24,23 @@ const Header = () => {
         Dev's NPC Organizer
       </div>
             <nav>
+              {authCtx.token ? (   
                 <NavLink to='/'><button className='header-btn' id='header-btn'>Home</button></NavLink>
+              ) : ( null)}
+
+              {authCtx.token ? (
                 <NavLink to='/collections'><button className='header-btn' id='header-btn'>Collections</button></NavLink>
+              ) : ( null)}
+
+              {authCtx.token ? (
                 <NavLink to='/profile'><button className='header-btn' id='header-btn'>My Account</button></NavLink>
-                <NavLink to='/login'><button className='header-btn' id='logoutbtn'>Logout</button></NavLink>
+              ) : ( null)}
+
+              {authCtx.token ? (
+                <NavLink to='/auth'><button className='header-btn' id='logoutbtn' onClick={logoutHandler}>Logout</button></NavLink>
+              ) : (null)}
             </nav>
+              
 
     </header>
   )

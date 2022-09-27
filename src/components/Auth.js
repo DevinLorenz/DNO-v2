@@ -1,78 +1,95 @@
 import React from 'react'
 import './styling/Auth.css'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import AuthContext from '../store/authContext'
+import axios from 'axios'
+const { CONNECTION_STRING } = process.env
+
 
 const Auth = () => {
-  const [register, setRegister] = useState(true)
+  const [register, setRegister] = useState(false)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
 
+
+  const authCtx = useContext(AuthContext)
+
+  const submitHandler = e => {
+      e.preventDefault()
+      
+     
+
+      const body = {
+          username,
+          email,
+          password
+      }
   
+      const url = `http://localhost:5000/user`
 
+      axios.post(register ? `${url}/register` : `${url}/login`, body)
+          .then((res) => {
+              console.log('AFTER AUTH', res.data)
+              authCtx.login(res.data.token, res.data.exp, res.data.userId)
+          })
+          .catch(err => {
+              console.log(err)
+              setPassword('')
+              setUsername('')
+              setEmail('')
+          })
+        }
 
-  return (
-    <div className='auth-bg'>
-      <div className='auth-container'>
-        <form className='signin-form'>
-          <h1>Welcome to Dev's NPC Organizer!</h1>
-
-          {register ? (<input 
-            type='text'
-            placeholder='First Name'
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />) : null}
-
-          {register ? (<input
-            type='text'
-            placeholder='Last Name'
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />) : null}
-
+    return (
+      <div className='auth-bg'>
+        <div className='auth-container'>
+          <form className='signin-form' onSubmit={submitHandler}>
+            <h1>Welcome to Dev's NPC Organizer!</h1>
 
             <input 
-          type='text' 
-          placeholder='Username' 
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          />
+            type='text' 
+            placeholder='Username' 
+            value={username}
+            minLength='6'
+            maxLength='20'
+            require={true}
+            onChange={(e) => setUsername(e.target.value)}
+            />
 
-          {register ? (<input
-            type='text'
-            placeholder='Email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></input>)
-          : null
-          }
+            {register ? (<input
+              type='text'
+              placeholder='Email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              require={true}
+            />)
+            : null
+            }
+              
+
+            <input 
+            type='password' 
+            placeholder='Password' 
+            value={password}
+            minLength='7'
+            maxLength='20'
+            onChange={(e) => setPassword(e.target.value)}
+            require={true}
+            />
+
+          
             
 
-          <input 
-          type='password' 
-          placeholder='Password' 
-          value={password}
-          />
-
-          {register ? (<input
-          type='password'
-          placeholder='Confirm Password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          />) : null}
-          
-
-          <button className='form-btn'>{!register ? 'Login' : 'Sign Up'}</button>
-          
-          
-          <p className='form-text' onClick={() => setRegister(!register)}>{!register ? 'Need an account?' : 'Already have an account?'}</p>
-        </form>
+            <button className='form-btn'>{!register ? 'Login' : 'Sign Up'}</button>
+            
+            <p className='form-text' onClick={() => setRegister(!register)}>{!register ? 'Need an account?' : 'Already have an account?'}</p>
+          </form>
+            
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
+
 
 export default Auth
