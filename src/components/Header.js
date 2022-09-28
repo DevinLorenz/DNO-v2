@@ -3,17 +3,24 @@ import { NavLink } from 'react-router-dom'
 import './styling/Header.css'
 import { useContext } from 'react'
 import AuthContext from '../store/authContext'
+import { Navigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { setLoadingFalse, setLoadingTrue } from '../store/slices/loadingSlice'
 
 
 
 const Header = () => {
+  let dispatch = useDispatch()
   const authCtx = useContext(AuthContext)
-  
   const logoutHandler = () => {
+    dispatch(setLoadingTrue())
     localStorage.removeItem('token')
     localStorage.removeItem('exp')
     localStorage.removeItem('userId')
     window.location.reload()
+
+    return setLoadingFalse()
   }
 
 

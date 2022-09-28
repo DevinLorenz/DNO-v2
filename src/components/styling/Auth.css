@@ -53,6 +53,8 @@
 
 .signin-form button:active {
     background-color: #707070;
+    position: relative;
+    top: 2px;
 }
 
 .signin-form input {

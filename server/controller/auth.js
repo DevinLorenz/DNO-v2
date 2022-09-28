@@ -4,6 +4,7 @@ const {User} = require('../models/user')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
+
 const createToken = (username, id) => {
     return jwt.sign(
         {
@@ -18,6 +19,7 @@ const createToken = (username, id) => {
 }
 
 module.exports = {
+
     register: async (req, res) => {
         try {
             const {username, password, email} = req.body
@@ -43,16 +45,16 @@ module.exports = {
             console.log('ERROR IN register')
             console.log(error)
             res.sendStatus(400)
+
         }
     },
 
-    login: async (req, res) => {
+    login: async (req, res) => {      
         try {
             const {username, password} = req.body
             let foundUser = await User.findOne({where: {username}})
             if (foundUser) {
                 const isAuthenticated = bcrypt.compareSync(password, foundUser.hashedPass)
-
                 if (isAuthenticated) {
                     const token = createToken(foundUser.dataValues.username, foundUser.dataValues.id)
                     const exp = Date.now() + 1000 * 60 * 60 * 48
@@ -65,12 +67,11 @@ module.exports = {
                 } else {
                     res.status(400).send('cannot log in 1')
                 }
-
             } else {
                 res.status(400).send('cannot log in 2')
             }
-        } catch (error) {
-            console.log('ERROR IN register')
+        } catch (error) {            
+            console.log('ERROR IN login')
             console.log(error)
             res.sendStatus(400)
         }

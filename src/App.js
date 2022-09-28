@@ -9,11 +9,16 @@ import Auth from './components/Auth';
 import Profile from './components/Profile';
 import { useContext }  from 'react';
 import AuthContext from './store/authContext';
+import { useSelector } from 'react-redux'
+import LoadingModal from './components/modals/LoadingModal';
+import { selectLoading } from './store/slices/loadingSlice';
 
 function App() {
   const authCtx = useContext(AuthContext);
+  let isLoading = useSelector(selectLoading)
   return (
     <div className="App">
+      {isLoading && <LoadingModal />}
     <Header />
       <Routes>
         <Route path='/' element={authCtx.token ? <Home/> : <Navigate to='/auth'/>} />

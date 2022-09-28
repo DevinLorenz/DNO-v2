@@ -44,7 +44,37 @@
     min-height: 50px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding-left: 20px;
     padding-right: 20px;
+    padding-top: 25px;
+}
+
+.add-new-btn {
+    background-color: #253E5B;
+    width: 50px;
+    height: 50px;
+    color: #c0c0c0;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    margin: 10px;
+    font-size: 50px;
+    cursor: pointer;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.5s;
+}
+
+.add-new-btn:hover {
+    background-color: #3f6999;
+}
+
+.add-new-btn:active {
+    background-color: #707070;
+    color: white;
+    position: relative;
+    top: 2px;
 }

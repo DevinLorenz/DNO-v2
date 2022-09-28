@@ -1,9 +1,11 @@
 import React from 'react'
 import './styling/Auth.css'
-import { useState, useContext } from 'react'
+import { useState, useContext, useSelector } from 'react'
 import AuthContext from '../store/authContext'
 import axios from 'axios'
-const { CONNECTION_STRING } = process.env
+import { setLoadingFalse, setLoadingTrue, toggleLoading } from '../store/slices/loadingSlice'
+import { useDispatch } from 'react-redux'
+
 
 
 const Auth = () => {
@@ -11,15 +13,13 @@ const Auth = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
-
+  
 
   const authCtx = useContext(AuthContext)
+  let dispatch = useDispatch()
 
   const submitHandler = e => {
       e.preventDefault()
-      
-     
-
       const body = {
           username,
           email,
@@ -29,11 +29,14 @@ const Auth = () => {
       const url = `http://localhost:5000/user`
 
       axios.post(register ? `${url}/register` : `${url}/login`, body)
-          .then((res) => {
+      .then(dispatch(setLoadingTrue()))
+      .then((res) => {
+            dispatch(setLoadingFalse())
               console.log('AFTER AUTH', res.data)
               authCtx.login(res.data.token, res.data.exp, res.data.userId)
           })
           .catch(err => {
+            dispatch(setLoadingFalse())
               console.log(err)
               setPassword('')
               setUsername('')
