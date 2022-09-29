@@ -12,13 +12,18 @@ import AuthContext from './store/authContext';
 import { useSelector } from 'react-redux'
 import LoadingModal from './components/modals/LoadingModal';
 import { selectLoading } from './store/slices/loadingSlice';
+import { selectAddRealm } from './store/slices/addRealmSlice';
+import AddRealmModal from './components/modals/AddRealmModal'
 
 function App() {
   const authCtx = useContext(AuthContext);
   let isLoading = useSelector(selectLoading)
+  let isAddingRealm = useSelector(selectAddRealm)
   return (
     <div className="App">
+      {isAddingRealm && <AddRealmModal />}
       {isLoading && <LoadingModal />}
+
     <Header />
       <Routes>
         <Route path='/' element={authCtx.token ? <Home/> : <Navigate to='/auth'/>} />

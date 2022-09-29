@@ -1,0 +1,28 @@
+.add-realm-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 1068px;
+    width: 100%;
+    
+    position: absolute;
+    top: 5;
+    left: 0;
+    
+    z-index: 100;
+    overflow: hidden;
+    }
+
+.add-realm-bg {
+    position: relative;
+    max-height: 1068px;
+    min-height: 1068px;
+    max-width: 1700px;
+    min-width: 1700px;
+    background-color: #000000c6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}

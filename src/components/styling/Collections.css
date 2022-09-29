@@ -37,7 +37,7 @@
 .collections-content {
     color: white;
     background-color: #c0c0c0;
-    height: 770px;
+    height: 745px;
     text-align: center;
     font-size: 20px;
     margin: 0 auto;
@@ -57,7 +57,6 @@
     color: #c0c0c0;
     border: none;
     border-radius: 50%;
-    padding: 10px;
     margin: 10px;
     font-size: 50px;
     cursor: pointer;
@@ -74,7 +73,7 @@
 
 .add-new-btn:active {
     background-color: #707070;
-    color: white;
     position: relative;
     top: 2px;
 }
+

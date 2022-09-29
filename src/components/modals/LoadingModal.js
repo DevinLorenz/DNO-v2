@@ -8,7 +8,7 @@ const loadingModal = () => {
     <div className='loading-modal'>
         <div className='loading-background'>
             
-                <img className='loader' src={require('../../assets/D20-dno.png')} />
+                <img className='loader' src={require('../../assets/D20-dno.png')} alt='loading-spinner' />
         </div>
     </div>
   )

@@ -4,11 +4,11 @@ const {User} = require('../models/user')
 module.exports = {
     createRealm: async (req, res) => {
         try {
-            const {name, notes, userId} = req.body
-            await Realm.create({name, notes, userId})
-            res.status(200).send(newRealm)
+            const {name, notes} = req.body
+            await Realm.create({name, notes})
+            res.status(200).send('newRealm')
         } catch (error) {
-            console.log('ERROR IN createRealm')
+            console.log('ERROR IN createRealm here')
             console.log(error)
             res.sendStatus(400)
         }

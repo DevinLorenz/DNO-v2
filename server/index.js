@@ -51,9 +51,9 @@ app.post('/user/register', register)
 app.post('/user/login', login)
 
 //realms
-app.get('/user/realms/:userId', isAuthenticated, getRealms)
-app.post('/user/realm/create', isAuthenticated, createRealm)
-app.get('/user/realm/:realmId', isAuthenticated, viewRealm)
+app.get('/user/realms/retrieve', getRealms)
+app.post('/user/realm/create', createRealm)
+app.get('/user/realm/:realmId',  viewRealm)
 app.get('/user/realm/notes/:realmId', isAuthenticated, viewRealmNotes)
 app.put('/realm/notes/:realmId', isAuthenticated, updateRealmNotes)
 app.delete('/user/realm/:realmId', isAuthenticated, deleteRealm)
@@ -90,8 +90,8 @@ app.put('/npc/desc/:npcId', isAuthenticated, editNpcDesc)
 
 
 // the force: true is for development -- it DROPS tables!!!
-sequelize.sync({ force: true })
-// sequelize.sync()
+// sequelize.sync({ force: true })
+sequelize.sync()
     .then(() => {
         app.listen(PORT, () => console.log(`db sync successful & server running on port ${PORT}`))
     })

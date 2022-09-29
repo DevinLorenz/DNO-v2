@@ -1,9 +1,9 @@
 import React from 'react'
 import './styling/Auth.css'
-import { useState, useContext, useSelector } from 'react'
+import { useState, useContext } from 'react'
 import AuthContext from '../store/authContext'
 import axios from 'axios'
-import { setLoadingFalse, setLoadingTrue, toggleLoading } from '../store/slices/loadingSlice'
+import { setLoadingFalse, setLoadingTrue } from '../store/slices/loadingSlice'
 import { useDispatch } from 'react-redux'
 
 
