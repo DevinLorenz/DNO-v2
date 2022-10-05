@@ -22,7 +22,7 @@ export const LoadingState = createSlice({
 export const { setLoadingTrue, setLoadingFalse, toggleLoading } = LoadingState.actions;
 
 export const selectLoading = (state) => {
-    console.log('SELECT LOADING', state.isLoading)
+    // console.log('SELECT LOADING', state.LoadingState);
     return state.LoadingState.value;
 }
 

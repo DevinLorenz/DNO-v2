@@ -4,8 +4,8 @@ const {User} = require('../models/user')
 module.exports = {
     createRealm: async (req, res) => {
         try {
-            const {name, notes} = req.body
-            await Realm.create({name, notes})
+            const {name, notes, userId} = req.body
+            await Realm.create({name, notes, userId})
             res.status(200).send('newRealm')
         } catch (error) {
             console.log('ERROR IN createRealm here')
@@ -16,9 +16,11 @@ module.exports = {
 
     getRealms: async (req, res) => {
         try {
+            console.log(req.params, req.body)
             const {userId} = req.params
-            User.findByPk(userId)
-            await user.getRealms()
+
+            const realms = await Realm.findAll({ where : {userId: userId}})
+            
             res.status(200).send(realms)
         } catch (error) {
             console.log('ERROR IN getRealms')

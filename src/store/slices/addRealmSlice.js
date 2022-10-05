@@ -18,7 +18,7 @@ export const addRealmState = createSlice({
 export const { setAddRealmTrue, setAddRealmFalse } = addRealmState.actions;
 
 export const selectAddRealm = (state) => {
-    console.log('SELECT ADD REALM', state.isAddingRealm)
+    // console.log('SELECT ADD REALM', state.addRealmState);
     return state.addRealmState.value;
 }
 

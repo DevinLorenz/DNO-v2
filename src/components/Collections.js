@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './styling/Collections.css';
 import addRealmModal from './modals/AddRealmModal';
 import axios from 'axios';
+import { NavLink, useNavigate } from 'react-router-dom';
+import ViewRealm from './subcomponents/ViewRealm';
 
+import AuthContext from '../store/authContext';
 import { useDispatch } from 'react-redux';
 import { setLoadingFalse, setLoadingTrue } from '../store/slices/loadingSlice';
 import {
@@ -11,43 +14,79 @@ import {
 } from '../store/slices/addRealmSlice';
 
 const Collections = () => {
+  const navigate = useNavigate();
   let dispatch = useDispatch();
+  const authCtx = useContext(AuthContext);
+  const userId = authCtx.userId;
+  const [realmData, setRealmData] = useState([]);
 
   const addRealmHandler = () => {
     dispatch(setAddRealmTrue());
   };
-
-  const createRealmCards = (realm) => {
-    const url = `http://localhost:5000/user`;
+  
+ 
+  const getRealms = () => {
+    dispatch(setLoadingTrue());
     axios
-      .get(`${url}/realm/retrieve`)
-      .then(dispatch(setLoadingTrue()))
-      .then((res) => {
-        dispatch(setLoadingFalse());
-        console.log('AFTER GET REALM', res.data);
-        const realmCards = res.data.map((realm) => {
-          return (
-            <div className="realm-card">
-              <div className="realm-card-title">
-                <h3>{realm.name}</h3>
-                <button className="realm-card-option-btn">...</button>
-              </div>
-              <button className="realm-card-btn">View</button>
-            </div>
-          );
-        });
-      })
-      .catch((err) => {
-        dispatch(setLoadingFalse());
-        console.log(err);
-      });
+    .get(`http://localhost:5000/user/realms/${userId}/retrieve`)
+    .then((res) => {
+      setRealmData(res.data);
+      console.log(res.data);
+      dispatch(setLoadingFalse());
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch(setLoadingFalse());
+    });
   };
+  
+  useEffect(() => {
+    getRealms();
+  }, []);
+  
+  
+  const viewRealmHandler = (id) => {
+    const realmId = id;
+    localStorage.setItem('realmId', realmId);
+    console.log(realmId);
+    
+  navigate(`/collections/view/${realmId}`)
+    
+  };
+
+ if(realmData.length >= 4) {
+  document.querySelector('.add-new-btn').setAttribute('disabled', 'disabled')
+ }
+
+
+
+  
 
   return (
     <div className="collections-bg">
       <div className="collections-box">
         <div className="collections-title">My Realms</div>
-        <div className="collections-content" onLoad={createRealmCards}>
+        <div className="collections-content"  >
+          {realmData.map((realm) => {
+            return (
+              <div className="realm-card">
+                <div className="realm-card-title">
+                  <button className='options-button'>•••</button>
+                  <div className="realm-card-title-text">{realm.name}</div>
+                </div>
+                <div className="realm-card-content">
+                  <button className='view-button' 
+                  onClick={viewRealmHandler.bind(null, realm.id)}
+                  key={realm.id}
+                  >
+                    View
+                  </button>
+                </div>
+              </div>
+            )
+          }  
+          )}
+
           <button className="add-new-btn" onClick={addRealmHandler}>
             +
           </button>
@@ -56,5 +95,8 @@ const Collections = () => {
     </div>
   );
 };
+
+
+
 
 export default Collections;

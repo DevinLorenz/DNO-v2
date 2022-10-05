@@ -47,7 +47,7 @@ module.exports = {
             allowNull: true
         },
         age: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: true
         },
         faith: {
@@ -62,53 +62,54 @@ module.exports = {
             type: DataTypes.STRING,
             allowNull: true
         },
-        langAndPerfs: {
+        langAndProfs: {
             type: DataTypes.TEXT,
             allowNull: true
         },
         isFavorite: {
             type: DataTypes.BOOLEAN,
-            allowNull: false
+            allowNull: false,
+            defaultValue: false
         },
         notes: {
             type: DataTypes.TEXT,
             allowNull: true
         },
         strength: {
-            type: DataTypes.INTEGER,
-            allowNull: false
+            type: DataTypes.STRING,
+            allowNull: true
         },
         dexterity: {
-            type: DataTypes.INTEGER,
-            allowNull: false
+            type: DataTypes.STRING,
+            allowNull: true
         },
         constitution: {
-            type: DataTypes.INTEGER,
-            allowNull: false
+            type: DataTypes.STRING,
+            allowNull: true
         },
         intelligence: {
-            type: DataTypes.INTEGER,
-            allowNull: false
+            type: DataTypes.STRING,
+            allowNull: true
         },
         wisdom: {
-            type: DataTypes.INTEGER,
-            allowNull: false
+            type: DataTypes.STRING,
+            allowNull: true
         },
         charisma: {
-            type: DataTypes.INTEGER,
-            allowNull: false
+            type: DataTypes.STRING,
+            allowNull: true
         },
         armorClass: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         initiative: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         hitPoints: {
             type: DataTypes.INTEGER,
-            allowNull: false
-        }
+            allowNull: true
+        },
     })
 }

@@ -6,7 +6,7 @@ module.exports = {
         try {
             const {name, notes, regionId} = req.body
             await Town.create({name, notes, regionId})
-            res.status(200).send(newTown)
+            res.status(200).send('newTown')
         } catch (error) {
             console.log('ERROR IN createTown')
             console.log(error)
@@ -16,9 +16,9 @@ module.exports = {
 
     getTowns: async (req, res) => {
         try {
+            console.log(req.params, req.body)
             const {regionId} = req.params
-            Region.findByPk(regionId)
-            await region.getTowns()
+            const towns = await Town.findAll({ where : {regionId: regionId}})
             res.status(200).send(towns)
         } catch (error) {
             console.log('ERROR IN getTowns')

@@ -8,10 +8,10 @@ module.exports = {
 
     createNpc: async (req, res) => {
         try {
-            const {firstName, LastName, gender, race, hair, skin, eyes, height, weight, age, faith, occupation, accent, langAndPerfs, notes, strength, dexterity, constitution, intelligence, wisdom, charisma, armorClass, initiative, hitPoints} = req.body
-            await Npc.create({firstName, LastName, gender, race, hair, skin, eyes, height, weight, age, faith, occupation, accent, langAndPerfs, notes, strength, dexterity, constitution, intelligence, wisdom, charisma, armorClass, initiative, hitPoints
+            const {firstName, lastName, gender, race, hair, skin, eyes, height, weight, age, faith, occupation, accent, langAndProfs, notes, strength, dexterity, constitution, intelligence, wisdom, charisma, armorClass, initiative, hitPoints, userId, realmId, regionId, townId} = req.body
+            await Npc.create({firstName, lastName, gender, race, hair, skin, eyes, height, weight, age, faith, occupation, accent, langAndProfs, notes, strength, dexterity, constitution, intelligence, wisdom, charisma, armorClass, initiative, hitPoints,  userId, realmId, regionId, townId
         })
-            res.status(200).send(newNpc)
+            res.status(200).send('newNpc')
         } catch (error) {
             console.log('ERROR IN createNpc')
             console.log(error)
@@ -49,11 +49,9 @@ module.exports = {
     getNpcsByRealm: async (req, res, next) => {
         try {
             const {realmId} = req.params;
-            const realm = await Realm.findByPk(realmId);
-            const regions = await realm.getRegions();
-            const towns = await regions.getTowns();
-            const npcs = await towns.getNpcs();
+            const npcs = await Npc.findAll({where: {realmId: realmId}});
             res.status(200).send(npcs);
+            
         } catch (error) {
             console.log('ERROR IN getNpcsByRealm');
             console.log(error);

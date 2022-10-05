@@ -51,32 +51,32 @@ app.post('/user/register', register)
 app.post('/user/login', login)
 
 //realms
-app.get('/user/realms/retrieve', getRealms)
-app.post('/user/realm/create', createRealm)
+app.get('/user/realms/:userId/retrieve', getRealms)
+app.post('/user/realm/:userId/create', createRealm)
 app.get('/user/realm/:realmId',  viewRealm)
 app.get('/user/realm/notes/:realmId', isAuthenticated, viewRealmNotes)
 app.put('/realm/notes/:realmId', isAuthenticated, updateRealmNotes)
 app.delete('/user/realm/:realmId', isAuthenticated, deleteRealm)
 
 //regions
-app.get('/user/regions/:realmId', isAuthenticated, getRegions)
-app.post('/user/region/create', isAuthenticated, createRegion)
+app.get('/user/regions/:realmId/retrieve', getRegions)
+app.post('/user/regions/:realmId/create', createRegion)
 app.get('/user/region/notes/:regionId', isAuthenticated, viewRegionNotes)
 app.put('/region/notes/:regionId', isAuthenticated, updateRegionNotes)
 app.delete('/user/region/:regionId', isAuthenticated, deleteRegion)
 
 //towns
-app.get('/user/towns/:regionId', isAuthenticated, getTowns)
-app.post('/user/town/create', isAuthenticated, createTown)
+app.get('/user/towns/:regionId/retrieve', getTowns)
+app.post('/user/towns/:regionId/create', createTown)
 app.get('/user/town/notes/:townId', isAuthenticated, viewTownNotes)
 app.put('/town/notes/:townId', isAuthenticated, updateTownNotes)
 app.delete('/user/town/:townId', isAuthenticated, deleteTown)
 
 //npcs
-app.get('/npcs/realm/:realmId', isAuthenticated, getNpcsByRealm)
+app.post('/user/:realmId/:regionId/:townId/npcs/create', createNpc)
+app.get('/user/realm/npcs/:realmId/retrieve', getNpcsByRealm)
 app.get('/npcs/region/:regionId', isAuthenticated, getNpcsByRegion)
-app.get('/npcs/town/:townId', isAuthenticated, getNpcsByTown)
-app.post('/user/npc/create', isAuthenticated, createNpc)
+app.get('/npcs/town/:townId', getNpcsByTown)
 app.get('/town/npc/notes/:npcId', isAuthenticated, viewNpcNotes)
 app.put('/npc/notes/:npcId', isAuthenticated, editNpcNotes)
 app.get('/user/npc/favorites/:userId', isAuthenticated, getFavoriteNpcs)

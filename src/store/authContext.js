@@ -20,6 +20,10 @@ const getLocalData = () => {
   const storedToken = localStorage.getItem('token')
   const storedExp = localStorage.getItem('exp')
   const storedId = localStorage.getItem('userId')
+  const realmId = localStorage.getItem('realmId')
+  const regionId = localStorage.getItem('regionId')
+  const townId = localStorage.getItem('townId')
+  const npcId = localStorage.getItem('npcId')
 
   const remainingTime = calculateRemainingTime(storedExp)
 
@@ -27,6 +31,10 @@ const getLocalData = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('exp')
     localStorage.removeItem('userId')
+    localStorage.removeItem('realmId')
+    localStorage.removeItem('regionId')
+    localStorage.removeItem('townId')
+    localStorage.removeItem('npcId')
     return null
   }
 
@@ -60,6 +68,10 @@ export const AuthContextProvider = (props) => {
     localStorage.removeItem('token')
     localStorage.removeItem('exp')
     localStorage.removeItem('userId')
+    localStorage.removeItem('realmId')
+    localStorage.removeItem('regionId')
+    localStorage.removeItem('townId')
+    localStorage.removeItem('npcId')
 
     if (logoutTimer) {
       clearTimeout(logoutTimer)

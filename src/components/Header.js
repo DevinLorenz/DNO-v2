@@ -1,14 +1,18 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './styling/Header.css';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import AuthContext from '../store/authContext';
 import { useDispatch } from 'react-redux';
 import { setLoadingFalse, setLoadingTrue } from '../store/slices/loadingSlice';
+import axios from 'axios';
 
 const Header = () => {
   let dispatch = useDispatch();
-  const authCtx = useContext(AuthContext);
+  const authCtx = useContext(AuthContext); 
+
+  const userId = authCtx.userId
+  
   const logoutHandler = () => {
     dispatch(setLoadingTrue());
     localStorage.removeItem('token');
@@ -18,6 +22,14 @@ const Header = () => {
 
     return setLoadingFalse();
   };
+
+ 
+  
+  
+  
+
+
+
 
   return (
     <header className="header-comp">
@@ -31,7 +43,12 @@ const Header = () => {
       <nav>
         {authCtx.token ? (
           <NavLink to="/">
-            <button className="header-btn" id="header-btn">
+            <button className="header-btn" id="header-btn"
+            onClick={() => {localStorage.removeItem('realmId')
+            localStorage.removeItem('regionId')
+            localStorage.removeItem('townId')
+            localStorage.removeItem('npcId')
+            }}>
               Home
             </button>
           </NavLink>
@@ -39,7 +56,12 @@ const Header = () => {
 
         {authCtx.token ? (
           <NavLink to="/collections">
-            <button className="header-btn" id="header-btn">
+            <button className="header-btn" id="header-btn"
+            onClick={() => {localStorage.removeItem('realmId')
+            localStorage.removeItem('regionId')
+            localStorage.removeItem('townId')
+            localStorage.removeItem('npcId')
+            }}>
               Collections
             </button>
           </NavLink>
@@ -47,7 +69,12 @@ const Header = () => {
 
         {authCtx.token ? (
           <NavLink to="/profile">
-            <button className="header-btn" id="header-btn">
+            <button className="header-btn" id="header-btn"
+            onClick={() => {localStorage.removeItem('realmId')
+            localStorage.removeItem('regionId')
+            localStorage.removeItem('townId')
+            localStorage.removeItem('npcId')
+            }}>
               My Account
             </button>
           </NavLink>

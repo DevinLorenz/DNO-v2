@@ -44,6 +44,8 @@ const Auth = () => {
           })
         }
 
+        
+
     return (
       <div className='auth-bg'>
         <div className='auth-container'>
@@ -56,7 +58,7 @@ const Auth = () => {
             value={username}
             minLength='6'
             maxLength='20'
-            require={true}
+            required
             onChange={(e) => setUsername(e.target.value)}
             />
 
@@ -65,7 +67,7 @@ const Auth = () => {
               placeholder='Email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              require={true}
+              required
             />)
             : null
             }
@@ -78,7 +80,7 @@ const Auth = () => {
             minLength='7'
             maxLength='20'
             onChange={(e) => setPassword(e.target.value)}
-            require={true}
+            required
             />
 
           

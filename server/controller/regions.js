@@ -6,7 +6,7 @@ module.exports = {
         try {
             const {name, notes, realmId} = req.body
             await Region.create({name, notes, realmId})
-            res.status(200).send(newRegion)
+            res.status(200).send('newRegion')
         } catch (error) {
             console.log('ERROR IN createRegion')
             console.log(error)
@@ -16,9 +16,9 @@ module.exports = {
 
     getRegions: async (req, res) => {
         try {
+            console.log(req.params, req.body)
             const {realmId} = req.params
-            Realm.findByPk(realmId)
-            await realm.getRegions()
+            const regions = await Region.findAll({ where : {realmId: realmId}})
             res.status(200).send(regions)
         } catch (error) {
             console.log('ERROR IN getRegions')
