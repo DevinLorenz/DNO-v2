@@ -76,15 +76,15 @@ const AddRealmModal = () => {
                         />
 
 
-                        <input 
-                            type='text' 
+                        <textarea 
+                            
                             placeholder='Realm Notes (optional)' 
                             value={realmNotes}
                             onChange={(e) => setRealmNotes(e.target.value)} 
                             id='realm-notes'
                         />
                         
-                        <button type='submit' className='add-realm-btn'>Add</button>
+                        <button type='submit' className='add-realm-btn'>Add Realm</button>
                     </form>
 
 

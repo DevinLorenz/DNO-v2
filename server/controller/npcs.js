@@ -9,7 +9,8 @@ module.exports = {
     createNpc: async (req, res) => {
         try {
             const {firstName, lastName, gender, race, hair, skin, eyes, height, weight, age, faith, occupation, accent, langAndProfs, notes, strength, dexterity, constitution, intelligence, wisdom, charisma, armorClass, initiative, hitPoints, userId, realmId, regionId, townId} = req.body
-            await Npc.create({firstName, lastName, gender, race, hair, skin, eyes, height, weight, age, faith, occupation, accent, langAndProfs, notes, strength, dexterity, constitution, intelligence, wisdom, charisma, armorClass, initiative, hitPoints,  userId, realmId, regionId, townId
+            console.log(strength)
+            await Npc.create({firstName, lastName, gender, race, hair, skin, eyes, height, weight, age, faith, occupation, accent, langAndProfs, notes, dexterity, strength, constitution, intelligence, wisdom, charisma, armorClass, initiative, hitPoints,  userId, realmId, regionId, townId
         })
             res.status(200).send('newNpc')
         } catch (error) {

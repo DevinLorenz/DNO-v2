@@ -76,8 +76,8 @@ const AddRealmModal = () => {
                         />
 
 
-                        <input 
-                            type='text' 
+                        <textarea 
+                             
                             placeholder='Region Notes (optional)' 
                             value={regionNotes}
                             onChange={(e) => setRegionNotes(e.target.value)} 

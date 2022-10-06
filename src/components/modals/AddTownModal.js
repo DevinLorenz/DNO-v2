@@ -76,8 +76,8 @@ const AddTownModal = () => {
                         />
 
 
-                        <input 
-                            type='text' 
+                        <textarea 
+                             
                             placeholder='Town Notes (optional)' 
                             value={townNotes}
                             onChange={(e) => setTownNotes(e.target.value)} 

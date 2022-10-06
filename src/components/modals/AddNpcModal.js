@@ -65,7 +65,7 @@ const AddNpcModal = () => {
             occupation: npcOccupation,
             accent: npcAccent,
             langAndProfs: npcLangAndProfs,
-            stength: npcStrength,
+            strength: npcStrength,
             dexterity: npcDexterity,
             constitution: npcConstitution,
             intelligence: npcIntelligence,
@@ -120,6 +120,7 @@ const AddNpcModal = () => {
                     </div>
 
                     <form className='add-npc-input' onSubmit={submitHandler}>
+                        <div className='add-npc-form'>
                         <div className='npc-name-container'>
                         <input 
                             type='text' 
@@ -140,16 +141,16 @@ const AddNpcModal = () => {
                         />
                         </div>
                         <div className='npc-desc-container'>
-                            
+                        <div className='npc-desc'>       
                             <select className='npcGender'
                                 value={npcGender}
                                 onChange={(e) => setNpcGender(e.target.value)}
                                 required
                             >
-                                <option value='default' default>--Gender--</option>
-                                <option value='male'>Male</option>
-                                <option value='female'>Female</option>
-                                <option value='nonbinnary'>Nonbinary</option>
+                                <option value='default' default >--Gender--</option>
+                                <option value='Male'>Male</option>
+                                <option value='Female'>Female</option>
+                                <option value='Nonbinary'>Nonbinary</option>
                                 
                             </select>
 
@@ -158,15 +159,15 @@ const AddNpcModal = () => {
                                 onChange={(e) => setNpcRace(e.target.value)}
                                 required
                             >
-                                <option value='default' default>--Race--</option>
-                                <option value='human'>Human</option>
-                                <option value='elf'>Elf</option>
-                                <option value='dwarf'>Dwarf</option>
-                                <option value='halfling'>Halfling</option>
-                                <option value='gnome'>Gnome</option>
-                                <option value='half-elf'>Half-Elf</option>
-                                <option value='half-orc'>Half-Orc</option>
-                                <option value='tiefling'>Tiefling</option>                              <option value='orc'>Orc</option>
+                                <option value='default' default >--Race--</option>
+                                <option value='Human'>Human</option>
+                                <option value='Elf'>Elf</option>
+                                <option value='Dwarf'>Dwarf</option>
+                                <option value='Halfling'>Halfling</option>
+                                <option value='Gnome'>Gnome</option>
+                                <option value='Half-elf'>Half-Elf</option>
+                                <option value='Half-orc'>Half-Orc</option>
+                                <option value='Tiefling'>Tiefling</option>                              <option value='Orc'>Orc</option>
                             </select>
                                 
 
@@ -175,18 +176,19 @@ const AddNpcModal = () => {
                                 onChange={(e) => setNpcOccupation(e.target.value)}
                                 required
                             >
-                                <option value='default' default>--Occupation--</option>
-                                <option value='farmer'>Farmer</option>
-                                <option value='blacksmith'>Blacksmith</option>
-                                <option value='merchant'>Merchant</option>
-                                <option value='guard'>Guard</option>
-                                <option value='priest'>Priest</option>
-                                <option value='mage'>Mage</option>
-                                <option value='thief'>Thief</option>
-                                <option value='bard'>Bard</option>
-                                <option value='other'>Other</option>
+                                <option value='default' default >--Occupation--</option>
+                                <option value='Farmer'>Farmer</option>
+                                <option value='Blacksmith'>Blacksmith</option>
+                                <option value='Merchant'>Merchant</option>
+                                <option value='Guard'>Guard</option>
+                                <option value='Priest'>Priest</option>
+                                <option value='Mage'>Mage</option>
+                                <option value='Thief'>Thief</option>
+                                <option value='Bard'>Bard</option>
                             </select>
-
+                        </div>
+                        </div>
+                        <div className='npc-middle-box'>
                             <div className='npc-characteristics'>
                                 <input
                                     type='text'
@@ -249,7 +251,7 @@ const AddNpcModal = () => {
                                 
                             
                             
-                        </div>
+                        
                         <div className='npc-stats-container'>
                             <select className='npc-stats'
                                 value={npcStrength}
@@ -419,39 +421,40 @@ const AddNpcModal = () => {
                                 <option value={1}>1</option>
                                 
                             </select>
-                        </div>
                         <div className='other-stats'>
                             <input className='npc-hitPoints'
                                 type='number'
-                                placeholder='Hit Points'
+                                placeholder='HP'
                                 value={npcHitPoints}
                                 onChange={(e) => setNpcHitPoints(e.target.value)}
                             />
                             <input className='npc-ac'
                                 type='number'
-                                placeholder='Armor Class'
+                                placeholder='AC'
                                 value={npcArmorClass}
                                 onChange={(e) => setNpcArmorClass(e.target.value)}
                             />
-                            <input className='lang-and-profs'
+                                <input className='npc-initiative'
+                                    type='number'
+                                    placeholder='Init'
+                                    value={npcInitiative}
+                                    onChange={(e) => setNpcInitiative(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        </div>
+
+                            <input id='lang-and-profs'
                                 type='text'
                                 placeholder='Languages and Proficiencies'
                                 value={npcLangAndProfs}
                                 onChange={(e) => setNpcLangAndProfs(e.target.value)}
                             />
-                            <input className='npc-initiative'
-                                type='number'
-                                placeholder='Initiative'
-                                value={npcInitiative}
-                                onChange={(e) => setNpcInitiative(e.target.value)}
-                            />
-                        </div>
-
 
 
                         <div className='npc-notes-container'>
-                        <input 
-                            type='text' 
+                        <textarea 
+                            
                             placeholder='Npc Notes (optional)' 
                             value={npcNotes}
                             onChange={(e) => setNpcNotes(e.target.value)} 
@@ -459,7 +462,8 @@ const AddNpcModal = () => {
                         />
                         </div>
                         
-                        <button type='submit' className='add-btn'>Add</button>
+                        <button type='submit' className='add-new-npcbtn'>Add</button>
+                    </div>
                     </form>
 
 

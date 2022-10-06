@@ -7,6 +7,7 @@ import { setAddTownTrue } from '../../store/slices/addTownSlice'
 import { setAddNpcTrue } from '../../store/slices/addNpcSlice'
 import { setLoadingFalse, setLoadingTrue } from '../../store/slices/loadingSlice'
 import axios from 'axios'
+import '../../assets/greenpfp.png'
 
 const ViewRealm = () => {
     const authCtx = useContext(AuthContext)
@@ -21,6 +22,9 @@ const ViewRealm = () => {
     let [npcData, setNpcData] = useState([])
     let [isDisplayed, setIsDisplayed] = useState(false)
     let [displayedNpc, setDisplayedNpc] = useState({})
+    let [displayedStats, setDisplayedStats] = useState(false)
+    let [displayedDescription, setDisplayedDescription] = useState(false)
+    let [displayedNotes, setDisplayedNotes] = useState(false)
 
     const addRegionHandler = () => {
         dispatch(setAddRegionTrue())
@@ -95,9 +99,11 @@ const ViewRealm = () => {
     }, [])
 
 
-    // const addNpcButton = document.querySelector('.add-npc-btn')
+    const addNpcButton = document.querySelector('.add-npc-btn')
 
     // if( regionValue === 'default' || townValue === 'default') {
+    //     addNpcButton.setAttribute('disabled', 'disabled')
+    // } else if(regionValue && townValue === null) {
     //     addNpcButton.setAttribute('disabled', 'disabled')
     // } else {
     //     addNpcButton.removeAttribute('disabled')
@@ -179,6 +185,9 @@ const ViewRealm = () => {
                 onClick={(e) => {
                   e.preventDefault()
                   localStorage.setItem('npcId', npc.id)
+                  setDisplayedStats(true)
+                  setDisplayedDescription(false)
+                  setDisplayedNotes(false)
                   setIsDisplayed(true)
                     setDisplayedNpc(npc)
                     console.log(displayedNpc)
@@ -209,21 +218,193 @@ const ViewRealm = () => {
       
       <div className='npc-box'>
         <div className='npc-title'>
-          <button className='npc-stats-btn'>Stats</button>
-          <button className='npc-description-btn'>Description</button>
-          <button className='npc-notes-btn'>Notes</button>
+          <button className='npc-stats-btn' onClick={() => {
+            setDisplayedStats(true)
+            setDisplayedDescription(false)
+            setDisplayedNotes(false)
+            }}>Stats</button>
+          <button className='npc-description-btn'onClick={() => {
+            setDisplayedStats(false)
+            setDisplayedDescription(true)
+            setDisplayedNotes(false)
+            }}>Description</button>
+          <button className='npc-notes-btn'onClick={() => {
+            setDisplayedStats(false)
+            setDisplayedDescription(false)
+            setDisplayedNotes(true)
+            }}>Notes</button>
         </div>
         <div className='npc-content'>
-          {isDisplayed ?
+          {isDisplayed && (displayedStats || displayedDescription) ?
                 (<div className='bio-box'>
             <div className='bio-title'>
-              <button className='npc-options-btn'>•••</button>
+                  <img src={require('../../assets/greenpfp.png')}></img>
+                  <div className='bio-container'>
               <h1>{displayedNpc.firstName} {displayedNpc.lastName}</h1>
-              <div className='bio-title-bio'>
                 <h3>{displayedNpc.gender} {displayedNpc.race} - {displayedNpc.occupation}</h3>
-              </div>
+            </div>
+              <button className='npc-options-btn'>•••</button>
               </div> 
           </div>) : null}
+          {isDisplayed && displayedStats ? (
+            <div className='stats-box'>
+              <div className='stats-list'>
+                <div className='stat-block'>
+                  <div className='stat-block-title'>
+                    <h3>Strength</h3>
+                  </div>
+                  <div className='stat-block-content'>
+                    <h1>{displayedNpc.strength}</h1>
+                  </div>
+                </div>
+                <div className='stat-block'>
+                  <div className='stat-block-title'>
+                    <h3>Dexterity</h3>
+                  </div>
+                  <div className='stat-block-content'>
+                    <h1>{displayedNpc.dexterity}</h1>
+                  </div>
+                </div>
+                <div className='stat-block'>
+                  <div className='stat-block-title'>
+                    <h3>Constitution</h3>
+                  </div>
+                  <div className='stat-block-content'>
+                    <h1>{displayedNpc.constitution}</h1>
+                  </div>
+                </div>
+                <div className='stat-block'>
+                  <div className='stat-block-title'>
+                    <h3>Intelligence</h3>
+                  </div>
+                  <div className='stat-block-content'>
+                    <h1>{displayedNpc.intelligence}</h1>
+                  </div>
+                </div>
+                <div className='stat-block'>
+                  <div className='stat-block-title'>
+                    <h3>Wisdom</h3>
+                  </div>
+                  <div className='stat-block-content'>
+                    <h1>{displayedNpc.wisdom}</h1>
+                  </div>
+                </div>
+                <div className='stat-block'>
+                  <div className='stat-block-title'>
+                    <h3>Charisma</h3>
+                  </div>
+                  <div className='stat-block-content'>
+                    <h1>{displayedNpc.charisma}</h1>
+                  </div>
+                </div>
+                
+              </div>
+              <div className='lower-box'>
+                <div className='lang-and-profs-box'>
+                  <div className='lang-and-profs-title'>
+                    <h3>Languages and Proficiencies</h3>
+                  </div>
+                  <div className='lang-and-profs-content'>
+                    <h4>{displayedNpc.langAndProfs}</h4>
+                </div>
+                <div>
+
+                </div>
+
+              </div>
+
+              <div className='hpInitAc-box'>
+                <div className='hitpoints-box'>
+                  <div className='hitpoints-title'>
+                    <h3>Hit Points</h3>
+                  </div>
+                  <div className='hitpoints-content'>
+                    <h1>{displayedNpc.hitPoints}</h1>
+                    </div>
+                </div>
+
+              <div className='armorclass-box'>
+                <div className='armorclass-title'>
+                  <h3>Armor Class</h3>
+                </div>
+                <div className='armorclass-content'>
+                  <h1>{displayedNpc.armorClass}</h1>
+                </div>
+              </div>
+
+              <div className='initiative-box'>
+                <div className='initiative-title'>
+                  <h3>Initiative</h3>
+                </div>
+                <div className='initiative-content'>
+                  <h1>{displayedNpc.initiative}</h1>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+          ) : null
+          }
+
+          {isDisplayed && displayedDescription ? (
+            <div className='description-box'>
+              <div className='description-box-title'>
+              </div>
+              <div className='description-box-content'>
+                <div className='row-one'>
+                  <h2>
+                    Hair: {displayedNpc.hair}
+                  </h2>
+
+                  <h2>
+                    Skin: {displayedNpc.skin}
+                  </h2>
+
+                  <h2>
+                    Eyes: {displayedNpc.eyes}
+                  </h2>
+                </div>
+                <div className='row-two'>
+                  <h2>
+                    Height: {displayedNpc.height}
+                  </h2>
+
+                  <h2>
+                    Weight: {displayedNpc.weight}
+                  </h2>
+
+                  <h2>
+                    Age: {displayedNpc.age}
+                  </h2>
+                </div>
+                <div className='row-three'>
+                  <h2>
+                    Accent: {displayedNpc.accent}
+                  </h2>
+
+                  <h2>
+                    Faith: {displayedNpc.faith}
+                  </h2>
+                </div>
+              </div>
+            </div>
+          ) : null
+          }
+
+          {isDisplayed && displayedNotes ? (
+            <div className='notes-box'>
+              <div className='notes-box-title'>
+                
+                <button className='notes-options-btn'>•••</button>
+              </div>
+              <div className='notes-box-content'>
+              
+                <h3>{displayedNpc.notes}</h3>
+              </div>
+            </div>
+          ) : null}
+          
+          
 
 
         </div>

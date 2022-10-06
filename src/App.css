@@ -2,7 +2,11 @@ html {
   background-color: #202020;
   max-width: 1700px;
   margin: 0 auto;
-  box-shadow: #000000 0px 35px 15px 5px;
   max-height: 1000px;
   margin-top: 5px;
+}
+
+.App {
+
+  box-shadow: #000000 0px 10px 10px 0px;
 }

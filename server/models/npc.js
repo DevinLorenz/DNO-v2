@@ -77,7 +77,7 @@ module.exports = {
         },
         strength: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: false
         },
         dexterity: {
             type: DataTypes.STRING,
