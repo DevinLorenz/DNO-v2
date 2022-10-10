@@ -74,7 +74,6 @@ const AddNpcModal = () => {
             armorClass: npcArmorClass,
             initiative: npcInitiative,
             hitPoints: npcHitPoints,
-
             notes: npcNotes,
             userId: userId,
             realmId: realmId,
@@ -167,7 +166,8 @@ const AddNpcModal = () => {
                                 <option value='Gnome'>Gnome</option>
                                 <option value='Half-elf'>Half-Elf</option>
                                 <option value='Half-orc'>Half-Orc</option>
-                                <option value='Tiefling'>Tiefling</option>                              <option value='Orc'>Orc</option>
+                                <option value='Tiefling'>Tiefling</option>
+                                <option value='Orc'>Orc</option>
                             </select>
                                 
 
